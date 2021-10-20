@@ -1,0 +1,12 @@
+<div class="grid">
+  <div class="grid-item">
+    <app-data-table
+      (save)="save($event)"
+      (delete)="delete($event)"
+      [trades]="trades$ | async"
+    ></app-data-table>
+  </div>
+  <div class="grid-item">
+    <app-chart [trades]="trades$ | async"></app-chart>
+  </div>
+</div>

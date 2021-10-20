@@ -1,0 +1,70 @@
+<div class="data-table">
+  <button
+    class="create-btn"
+    mat-button
+    (click)="openDialog(null)"
+    mat-flat-button
+    color="primary"
+  >
+    CREATE
+  </button>
+
+  <table class="trades-table" *ngIf="trades" mat-table [dataSource]="trades">
+    <ng-container matColumnDef="entryDate">
+      <th mat-header-cell *matHeaderCellDef>Entry Date</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.entryDate | date: 'mediumDate' }}
+      </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="entryPrice">
+      <th mat-header-cell *matHeaderCellDef>Entry Price</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.entryPrice | currency }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="exitDate">
+      <th mat-header-cell *matHeaderCellDef>Exit Date</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.exitDate | date: 'mediumDate' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="exitPrice">
+      <th mat-header-cell *matHeaderCellDef>Exit Price</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.exitPrice | currency }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="profit">
+      <th mat-header-cell *matHeaderCellDef>Profit</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.profit | currency }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let element" class="action-link">
+        <a href="javascript:void(0)" class="link" (click)="openDialog(element)"
+          ><mat-icon aria-hidden="false" aria-label="Edit">edit</mat-icon></a
+        >
+        |
+        <a
+          href="javascript:void(0)"
+          class="link"
+          (click)="delete.emit(element.id)"
+          ><mat-icon aria-hidden="false" aria-label="Delete"
+            >delete</mat-icon
+          ></a
+        >
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

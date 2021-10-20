@@ -1,0 +1,16 @@
+.data-table {
+  text-align: right;
+  .trades-table {
+    width: 100%;
+    margin: 20px 0;
+    text-align: center;
+
+    .mat-header-cell {
+      text-align: center;
+    }
+
+    .link {
+      color: #fff;
+    }
+  }
+}

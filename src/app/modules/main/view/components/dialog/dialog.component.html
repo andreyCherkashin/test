@@ -1,0 +1,75 @@
+<h1 mat-dialog-title>
+  <strong>{{ data && data.id ? 'Edit' : 'Create' }} Record</strong>
+</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="fill">
+      <mat-label>Choose an entry date</mat-label>
+      <input
+        formControlName="entryDate"
+        matInput
+        [matDatepicker]="entryPicker"
+      />
+      <mat-error *ngIf="form.get('entryDate')?.hasError('required')">
+        Entry Date <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="form.get('entryDate')?.hasError('dates')">
+        Entry Date from should be less than Exit Date
+      </mat-error>
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="entryPicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #entryPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Entry Price</mat-label>
+      <input formControlName="entryPrice" type="number" matInput />
+      <mat-error *ngIf="form.get('entryPrice')?.hasError('required')">
+        Entry Price <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="form.get('entryPrice')?.hasError('min')">
+        Entry Price should be positive number
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Choose an exit date</mat-label>
+      <input formControlName="exitDate" matInput [matDatepicker]="exitPicker" />
+      <mat-error *ngIf="form.get('exitDate')?.hasError('required')">
+        Exit Date <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="form.get('exitDate')?.hasError('dates')">
+        Exit Date from should be more than Exit Date
+      </mat-error>
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="exitPicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #exitPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Exit Price</mat-label>
+      <input formControlName="exitPrice" type="number" matInput />
+      <mat-error *ngIf="form.get('exitPrice')?.hasError('required')">
+        Exit Price <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="form.get('exitPrice')?.hasError('min')">
+        Exit Price should be positive number
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button
+    mat-button
+    mat-flat-button
+    color="primary"
+    [disabled]="!form.valid"
+    (click)="save()"
+  >
+    Save
+  </button>
+  <button mat-button mat-flat-button color="warn" (click)="cancel()">
+    Cancel
+  </button>
+</div>
